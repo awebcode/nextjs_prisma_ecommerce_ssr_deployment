@@ -3,12 +3,12 @@ import { getProductClinet } from "@/utility/getData";
 import React from "react";
 
 async function Page() {
-  // const { data } = await getProductClinet();
+  const { data } = await getProductClinet();
 
   return (
     <div className=" container py-20">
       <h1 className=" text-[30px]"> All Product </h1>
-      {/* <Card data={data} /> */}
+      <Card data={data} />
 
       <ol className="flex justify-center gap-1 text-xs font-medium">
         <li>
