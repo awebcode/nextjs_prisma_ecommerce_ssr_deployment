@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String
+  lastName  String
+  email     String    @unique
+  password  String
+  otp       Int       @default(0)
+  address   String
+  city      String    @default("Bangladesh")
+  product   product[]
+
+  category category[]
+  cart     cart[]
+  invoices invoices[]
+}
+
+model product {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  price              String
+  unit               String
+  imagurl            String
+  title              String
+  description        String
+  brand              String
+  discountPercentage String
+  user               users  @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  userId             String @db.ObjectId
+
+  category   category @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  categoryId String
+
+  cart   cart?   @relation(fields: [cartId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  cartId String? @db.ObjectId
+}
+
+model cart {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  user   users  @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  userId String @db.ObjectId
+
+  product product[]
+}
+
+model category {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+
+  user   users  @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  userId String @db.ObjectId
+
+  product product[]
+}
+
+model customers {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  firstName String
+  lastName  String
+  email     String @unique
+  password  String
+  otp       Int    @default(0)
+  city      String
+
+  invoices invoices[]
+}
+
+model invoices {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  total     String
+  discount  String
+  qnt       String
+  firstName String
+  lastName  String
+  email     String @unique
+  city      String
+  road      String
+  postCode  String
+  country   String
+
+  customers   customers? @relation(fields: [customersId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  customersId String?    @db.ObjectId
+
+  user   users  @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  userId String @db.ObjectId
+}

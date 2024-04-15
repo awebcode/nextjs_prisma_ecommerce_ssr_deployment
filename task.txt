@@ -1,0 +1,13 @@
+1. database model creating
+2. user model 
+3. cetagory
+4. pagination
+5. paytem getway
+6. product searching
+7. deshboard
+8. comments
+9. order id provide
+10. rateing 
+11. product
+12. wish list
+13. review average
