@@ -4,6 +4,7 @@ import React from "react";
 
 async function Page() {
   const { data } = await getProductClinet();
+  console.log({data})
 
   return (
     <div className=" container py-20">
