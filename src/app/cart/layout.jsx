@@ -5,14 +5,13 @@ import TopNav from "@/components/navbar/TopNav";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <TopNav />
-        <MainNav />
-        <PageHeader />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <>
+      {" "}
+      <TopNav />
+      <MainNav />
+      <PageHeader />
+      {children}
+      <Footer />
+    </>
   );
 }

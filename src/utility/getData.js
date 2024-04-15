@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 
 let apiUrl;
 if (process.env.NODE_ENV === 'production') {
-    apiUrl = process.env.URL_PROD;
+  apiUrl = process.env.URL_PROD;
 } else {
     apiUrl = process.env.URL;
 }
@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'production') {
 // customer product
 export const getProductClinet = async () => {
   const data = await fetch(`${apiUrl}/customer/product`, {
-    cache: "no-cache",
+    // cache: "no-cache",
   });
   const response = await data.json();
   return response;
